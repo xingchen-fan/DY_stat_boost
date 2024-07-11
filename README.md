@@ -1,7 +1,7 @@
 # DY_stat_boost
 End-to-end scripts to generate more events for DY+fake events
 ## Pico script
-Scripts use UCSB pico data format files to select certain events from 2016-2018 UL samples. Three events producer are:
+Scripts use UCSB pico data format files to select certain events from 2016-2018 UL samples. Three event producers are:
 
 * `producer.c`: Select DY+fake baseline events. BDT evaluation requires a weight xml file.
   * Output _baseline_pico.root_ file.
@@ -23,7 +23,7 @@ mkdir AODmacthing
 mkedfltr EventIDFilter
 ```
 
-In the filter, the event ID of each AOD event is compared with that of all the slected pico events. If the ID matched, the AOD event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset in `AODmacthing/EventIDFilter/python`. Two configuration files are needed, one for CMSSW to run and the other for CRAB job submission. Out put files will be aved in the CERN box as specified in the CRAB config file.
+In the filter, the event ID of each AOD event is compared with that of all the slected pico events. If the ID matched, the AOD event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset in `AODmacthing/EventIDFilter/python`. Two configuration files are needed, one for CMSSW to run and the other for CRAB job submission. Output files will be saved in the CERN box as specified in the CRAB config file.
 
 Equivalent EDM files to the pico will be output 
   * ie. _baseline_AOD.root_ and _photon_AOD.root_.
