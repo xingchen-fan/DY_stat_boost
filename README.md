@@ -28,7 +28,9 @@ In the filter, the event ID of each AOD event is compared with that of all the s
 The truth matching of the pico recon photon with the AOD truth particles happens here. Due to the large number of events we need to go through, we use CERN batch system, HTCondor, for the process.
 
 `truth_matching_study_DY.py`: Truth matching DY+fake baseline events and output no match events.
+
 `truth_matching_study_DY_match_ph.py`: Truth matching DY+fake baseline events and output match truth photon (pion mother) events.
+
 `truth_matching_study_photon_only.py`: Truth matching events only using photon object selection and output no match events.
 
 
