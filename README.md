@@ -40,7 +40,9 @@ Several truth matching processes are:
 * `truth_matching_study_photon_only.py`: Truth matching events only using photon object selection and output no match events.
   * Output _nomatch_photon_pico.root_ file.
 
-## Event mixing
+## No match events - Event mixing
 To generate more no match events, we mix the Z candicates from _Z_pico.root_ events with no match photons from _nomatch_photon_pico.root_ events. To separate GGF and Dijet events, use `print_event_id.py` to print out the event IDs of the corresponding events, and plot them separately by event ID matching.
 
 The mixed events' error bars need extra cares and please use `plot_mixing_corrErrBar.c` to plot the corrected error bar.
+
+## Match events - Generator filter
