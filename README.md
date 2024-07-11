@@ -22,4 +22,4 @@ mkdir FilterDir
 mkedfltr SomeFilter
 ```
 
-In the filter, the event ID of each AOD event is compared with that of all the slected pico events. If the ID matched, the AOD event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset.
+In the filter, the event ID of each AOD event is compared with that of all the slected pico events. If the ID matched, the AOD event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset in `FilterDir/SomeFilter/python`.
