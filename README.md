@@ -22,4 +22,5 @@ mkdir AODmacthing
 mkedfltr EventIDFilter
 ```
 
-In the filter, the event ID of each AOD event is compared with that of all the slected pico events. If the ID matched, the AOD event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset in `AODmacthing/EventIDFilter/python`.
+In the filter, the event ID of each AOD event is compared with that of all the slected pico events. If the ID matched, the AOD event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset in `AODmacthing/EventIDFilter/python`. Two configuration files needed in this dir, one for CMSSW to run and another for CRAB job submission. Output files will be saved to CERN box as specified in the CRAB configuration file.
+
