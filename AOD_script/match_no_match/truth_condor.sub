@@ -1,0 +1,20 @@
+universe = vanilla
+executable = condorParser.sh
+arguments = $$([$(Process) + 1])
+
+error   = ../out_err/err.$$([$(Process)+1])
+output  = ../out_err/out.$$([$(Process)+1])
+log = truth.log
+MY.WantOS = "el9"
+
+#2017 DY AOD file number
+#queue 537
+
+#2018 DY AOD file number
+queue 562
+
+#2016 DY AOD file number
+#queue 324
+
+#2016APV DY AOD file number
+#queue 379
