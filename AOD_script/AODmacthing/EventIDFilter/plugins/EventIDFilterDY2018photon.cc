@@ -3,7 +3,7 @@
 // Package:    AODmacthing/EventIDFilter
 // Class:      EventIDFilter
 //
-/**\class EventIDFilter EventIDFilter.cc AODmacthing/EventIDFilter/plugins/EventIDFilter.cc
+/**\class EventIDFilter EventIDFilter.cc AODmacthing/EventIDFilter/plugins/EventIDFilterDY2018photon.cc
 
  Description: [one line class summary]
 

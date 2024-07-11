@@ -3,7 +3,7 @@
 // Package:    AODmacthing/EventIDFilter
 // Class:      EventIDFilter
 //
-/**\class EventIDFilter EventIDFilter.cc AODmacthing/EventIDFilter/plugins/EventIDFilter.cc
+/**\class EventIDFilter EventIDFilter.cc AODmacthing/EventIDFilter/plugins/EventIDFilterDY2018.cc
 
  Description: [one line class summary]
 
@@ -50,8 +50,8 @@ private:
   virtual bool filter(edm::Event&, const edm::EventSetup&) override;
   virtual void endStream() override;
   std::vector<Long64_t> id_list;
-  virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;
-  virtual void endRun(edm::Run const&, edm::EventSetup const&) override;
+  //virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;
+  //virtual void endRun(edm::Run const&, edm::EventSetup const&) override;
   //virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
   //virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
 
@@ -102,25 +102,12 @@ bool EventIDFilterDY2018::filter(edm::Event& iEvent, const edm::EventSetup& iSet
   Long64_t event_aod = iEvent.id().event();
   bool match = false;
 
-  //root://eosuser.cern.ch//eos/user/f/fanx/DY_output_kingscanyon_v1_2018_merge.root
-  /*std::vector<Long64_t> id_list_;
-  auto picofile = TFile::Open("root://eosuser.cern.ch//eos/user/f/fanx/DY_output_kingscanyon_v1_2018_merge.root", "READ");
-  Long64_t event_pico = 0;
-  auto tree = (TTree*)picofile->Get("tree");
-  tree->SetBranchAddress("event", &event_pico);
-  for (auto i(0); i < tree->GetEntries(); i++){
-    tree->GetEntry(i);
-    id_list_.push_back(event_pico);
-  }
-  picofile->Close();*/
-  
   for (unsigned int i(0); i < id_list.size(); i++){
     if (event_aod == id_list[i]) {
       match = true;
       break;
     }
   }
-  //  id_list_.clear();
   return match;
 }
 
@@ -143,30 +130,20 @@ void EventIDFilterDY2018::endStream() {
 }
 
 // ------------ method called when starting to processes a run  ------------
-
+/*
 void
 EventIDFilterDY2018::beginRun(edm::Run const&, edm::EventSetup const&)
-{/*
-  auto picofile = TFile::Open("root://eosuser.cern.ch//eos/user/f/fanx/DY_output_kingscanyon_v1_2018_merge.root", "READ");
-  Long64_t event_pico = 0;
-  auto tree = (TTree*)picofile->Get("tree");
-  tree->SetBranchAddress("event", &event_pico);
-  for (auto i(0); i < tree->GetEntries(); i++){
-    tree->GetEntry(i);
-    id_list.push_back(event_pico);
-  }
-  picofile->Close();*/
+{
 }
-
+*/
 
 // ------------ method called when ending the processing of a run  ------------
-
+/*
 void
 EventIDFilterDY2018::endRun(edm::Run const&, edm::EventSetup const&)
 {
-  //  id_list.clear();
 }
-
+*/
 
 // ------------ method called when starting to processes a luminosity block  ------------
 /*
