@@ -60,7 +60,7 @@ There are three files per production:
 * `.env`: where output and input file names reside.
 * `.sub`: where Condor job settings are specified.
 
-Multithreading is turned on for Madgraph and Pythia8. Import the gen filter files into the CMSSW and compile. 
+[Multithreading](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookGenMultithread) is turned on for Madgraph and Pythia8. Import the gen filter files into the CMSSW and compile. 
 
 __Notice__:
 * The current gen filter only works with `CMSSW_10_6_X` and some changes are required for newer version of CMSSW.
