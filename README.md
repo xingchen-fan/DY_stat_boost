@@ -64,5 +64,5 @@ Multithreading is turned on for Madgraph and Pythia8. Import the gen filter file
 
 __Notice__:
 * The current gen filter only works with `CMSSW_10_6_X` and some changes are required for newer version of CMSSW.
-* Right now the output NanoAOD files will be transferred to my EOS space. Please change it to yours at the end of `.sh`.
+* Right now the output NanoAOD files will be transferred to my EOS space. Please change `OUTPUT_DIR` to yours in `.env`.
 * The job number is used as the random seed for event generation. Please change it to some other numbers in `.sub`.
