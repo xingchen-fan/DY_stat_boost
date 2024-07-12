@@ -35,7 +35,7 @@ echo AOD_NAME \= $AOD_NAME
 echo MINIAOD_NAME \= $MINIAOD_NAME
 echo NANOAOD_NAME \= $NANOAOD_NAME
 echo BASE_TAG \= $BASE_TAG
-
+echo OUTPUT_DIR \= $OUTPUT_DIR
 # Set variables
 JOBNUM=$(($1+1)) #$1 will start from 0. Need to add at least 1.
 NEVENTS=$2
@@ -263,7 +263,9 @@ rm -f $MINIAOD_NAME"__job-"${JOBNUM}.root
 
 rm -rf CMSSW_10_6_26/
 rm -f ${TAG}__NanoAODv9__cfg.py
-eos cp $NANOAOD_NAME"__job-"${JOBNUM}.root /eos/user/f/fanx/2017DYFilterSample/.
+
+
+eos cp $NANOAOD_NAME"__job-"${JOBNUM}.root $OUTPUT_DIR/.
 rm -f $NANOAOD_NAME"__job-"${JOBNUM}.root
 # End of "$TAG"_cmd.sh file
 EndOfTestFile
