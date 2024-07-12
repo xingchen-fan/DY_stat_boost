@@ -48,6 +48,11 @@ The mixed events' error bars need extra cares and please use `plot_mixing_corrEr
 ## Match events - Generator filter
 Codes are originally from Jae-Bak's [repository](https://github.com/jaebak/produceMC/tree/UL). Refer to it for environment setup. I modified scripts to suit my need of mass generation.
 
+Initialize your VOMS with
+```
+voms-proxy-init --voms cms --out $(pwd)/voms_proxy.txt -valid 172:0
+```
+
 The idea is plain and simple: use the same script that generates the central produced DY MC samples to generate more events, but apply a filter on the generator level to save time on the simulation and reconstruction. Go to the [DAS](https://cmsweb.cern.ch/das/) page to find the corresponding dataset and grap its production code from McM.
 
 There are three files per production:
