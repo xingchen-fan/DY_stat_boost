@@ -6,10 +6,10 @@
 #include "TROOT.h"
 #include "TVector3.h"
 
-void Zg_mixing(){
-  auto ph_file = new TFile("sample/no_match_ph_npv.root","READ");
-  auto z_file = new TFile("sample/DY_Z_output_kingscanyon_v1_2017.root","READ");
-  auto outfile = new TFile("sample/mixing_output_full_photon_dijet.root", "RECREATE");
+void Zg_mixing(TString inphoton_, TString inZ_, TString outfile_){
+  auto ph_file = new TFile(inphoton_, "READ");
+  auto z_file = new TFile(inZ_, "READ");
+  auto outfile = new TFile(outfile_, "RECREATE");
   auto phtree = (TTree*)ph_file->Get("tree");
   auto ztree = (TTree*)z_file->Get("tree");
   auto outtree = new TTree("tree", "tree");
@@ -94,7 +94,6 @@ void Zg_mixing(){
       jet_phi->clear();
       jet_isgood->clear();
       ztree->GetEntry(j);
-      if (njet <= 1) continue;
       TLorentzVector l1, l2, z, h, j1, j2;
       int chose_jet = 0;
       l1.SetPtEtaPhiM(l1_pt, l1_eta, l1_phi, l1_m);
@@ -107,24 +106,32 @@ void Zg_mixing(){
       //z.Print();
       //std::cout << h.M() << std::endl;
       mindR = GetmindR(l1, l2, g);
-      if (h.M() > 100. && h.M() < 180. && h.M() + z.M() > 185. && photon_pt/h.M() > 15./110 && z.M() > 81. && z.M() < 101. && mindR > 0.4){
-	for (int k(0); k < jet_m->size(); k++){
-	  if ((*jet_isgood)[k] && chose_jet == 0){
-	    j1.SetPtEtaPhiM((*jet_pt)[k], (*jet_eta)[k], (*jet_phi)[k],(*jet_m)[k]);
-	    chose_jet ++;
-	  }
-	  else if ((*jet_isgood)[k] && chose_jet == 1){
-	    j2.SetPtEtaPhiM((*jet_pt)[k], (*jet_eta)[k], (*jet_phi)[k],(*jet_m)[k]);
-	    break;
-	  }
-	}
+      if (h.M() > 100. && h.M() < 180. && h.M() + z.M() > 185. && photon_pt/h.M() > 15./110 && z.M() > 81. && z.M() < 101. && mindR > 0.3){
 	TLorentzVector q1 = AssignQ1(h);
         TLorentzVector q2 = AssignQ2(h);
-	TLorentzVector jj = j1 + j2;
-	jj_m = jj.M();
-	jj_pt = jj.Pt();
-	jj_dR = j1.DeltaR(j2);
-	jj_dphi = j1.DeltaPhi(j2);
+	if (jet_m->size() > 0){
+	  for (int k(0); k < jet_m->size(); k++){
+	    if ((*jet_isgood)[k] && chose_jet == 0){
+	      j1.SetPtEtaPhiM((*jet_pt)[k], (*jet_eta)[k], (*jet_phi)[k],(*jet_m)[k]);
+	      chose_jet ++;
+	    }
+	    else if ((*jet_isgood)[k] && chose_jet == 1){
+	      j2.SetPtEtaPhiM((*jet_pt)[k], (*jet_eta)[k], (*jet_phi)[k],(*jet_m)[k]);
+	      break;
+	    }
+	  }
+	  TLorentzVector jj = j1 + j2;
+	  jj_m = jj.M();
+	  jj_pt = jj.Pt();
+	  jj_dR = j1.DeltaR(j2);
+	  jj_dphi = j1.DeltaPhi(j2);
+	}
+	else {
+	  jj_m = 0.;
+	  jj_pt = 0.;
+	  jj_dR = 0.;
+	  jj_dphi = 0.;
+	}
 	llphoton_costheta = cos_theta(h, z, l1, l2);
 	llphoton_cosTheta = cos_Theta(h, z, q1, q2);
 	llphoton_psi = Getphi(q1, q2, z, l1, l2, h);
