@@ -57,8 +57,8 @@ generator = cms.EDFilter("Pythia8ConcurrentHadronizerFilter",
 
 testFilter = cms.EDFilter("MatchDYFilter",
                           pdgID = cms.untracked.int32(22),
-                          minPt = cms.untracked.double(5.),
-                          motherPdgID = cms.untracked.vint32(111)
+                          minPt = cms.untracked.double(0.),
+                          motherPdgID = cms.untracked.vint32(111, 221)
 )
 
 
