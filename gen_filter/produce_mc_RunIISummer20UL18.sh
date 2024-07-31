@@ -61,11 +61,10 @@ fi
 export X509_USER_PROXY=$(pwd)/voms_proxy.txt
 export EOS_MGM_URL=root://eosuser.cern.ch
 
-mkdir job_scripts
 
 # https://cms-pdmv.cern.ch/mcm/chained_requests?contains=EGM-RunIISummer20UL18NanoAODv9-00004&page=0&shown=15
 
-cat <<EndOfTestFile > job_scripts/"$TAG"_cmd.sh
+cat <<EndOfTestFile > "$TAG"_cmd.sh
 #!/bin/bash
 
 echo "----GEN----"
@@ -274,3 +273,10 @@ eos cp $NANOAOD_NAME"__job-"${JOBNUM}.root $OUTPUT_DIR/.
 rm -f $NANOAOD_NAME"__job-"${JOBNUM}.root
 date
 
+# End of "$TAG"_cmd.sh file
+EndOfTestFile
+
+echo "Made "$TAG"_cmd.sh"
+chmod +x "$TAG"_cmd.sh
+
+./${TAG}_cmd.sh
