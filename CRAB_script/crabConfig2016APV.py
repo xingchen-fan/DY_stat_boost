@@ -11,7 +11,7 @@ config.General.transferOutputs = True
 config.JobType.pluginName = 'PrivateMC'
 config.JobType.psetName = 'ConfigDY.py'
 config.JobType.scriptExe  = '2016APVDY.sh'
-config.JobType.scriptArgs = ['Nevents=10000', 'Index=20000']
+config.JobType.scriptArgs = ['Nevents=10000', 'Index=0']
 config.JobType.inputFiles = ['FrameworkJobReport.xml']
 config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 9000

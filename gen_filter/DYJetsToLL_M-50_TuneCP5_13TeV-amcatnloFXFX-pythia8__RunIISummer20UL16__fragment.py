@@ -1,4 +1,4 @@
-# https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/EGM-RunIISummer20UL17wmLHEGEN-00001
+# https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/EGM-RunIISummer20UL16wmLHEGEN-00003
 #Link to datacards:
 #https://github.com/cms-sw/genproductions/tree/master/bin/GenValidation/updated_validation_cards/dy_fxfx_mll50/dy012jfxfx_inc
 
@@ -11,6 +11,7 @@ externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
     outputFile = cms.string('cmsgrid_final.lhe'),
     scriptName = cms.FileInPath('GeneratorInterface/LHEInterface/data/run_generic_tarball_cvmfs.sh'),
     generateConcurrently = cms.untracked.bool(True)
+                                     
 )
 
 #GS fragment
@@ -54,7 +55,6 @@ generator = cms.EDFilter("Pythia8ConcurrentHadronizerFilter",
                                     )
     )
 )
-
 testFilter = cms.EDFilter("MatchDYFilter",
                           pdgID = cms.untracked.int32(22),
                           minPt = cms.untracked.double(5.),
