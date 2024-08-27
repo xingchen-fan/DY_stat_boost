@@ -94,4 +94,14 @@ Inside the CRAB config file, there are some key lines and parameters that I will
 * `config.JobType.scriptExe` : Specify the shell script run in jobs.
 * `config.Data.totalUnits = 10000` : Number of jobs = 10000. Each job will have a job number `njob` from 1 to 10k. CRAB only allows up to 10k jobs per submission.
 * ***`config.JobType.scriptArgs = ['Nevents=10000', 'Index=0']`*** : `Nevents` should always be 10000 per job, but there is a text `njob + Index` at the end of the output NanoAOD file to distinguish different jobs. If the output files of all your submissions are transferred to the same directory, you need to change `Index` per submission so that the names of the files are different from each other.
-  
+
+## Guidance for the number of jobs
+
+According to my rough estimation, 50k events requested will give us one event after the baseline and truth matching. I have this table for 1 fold of statistics:
+|Era|Existing events after baseline|Number of jobs (10k events/job)|
+|-|-|-|
+|2016|5128|26000|
+|2016APV|6439|33000|
+|2017|13045|65000|
+|2018|14056|70000|
+
