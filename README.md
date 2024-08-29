@@ -79,6 +79,7 @@ Install `CMSSW10` and compile the generator filter and fragment files by running
 Each era has a set of files. Take 2016 as an example, let's look at them:
 * `2016DY.sh` : where the generation of new events only happens.
 * `ConfigDY.py` : A minimal skeleton CMSSW config file, required by the CRAB config file and shared by all eras.
+* `FrameworkJobReport.xml` : A minimal report file required by the CRAB config file and shared by all eras.
 * `crabConfig2016.py` : the CRAB config file that you need to modify.
 
 There is no need to modify the skeleton CMSSW config file, but the shell script and the CRAB config file.
