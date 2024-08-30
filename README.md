@@ -74,10 +74,9 @@ On lxplus, use a command like this ([reference](https://cms-sw.github.io/singula
 ```
 cmssw-el7
 ```
-
-This container has the access to the EOS, so you can install your CMSSW at your CERN box.
-
-Install `CMSSW10` and compile the generator filter and fragment files by running `setup.sh`.
+To set up the CMSSW:
+* **RECOMMENDED:** cd to `/eos/project-h/htozg-dy-privatemc/CMSSW_10_6_40/src` and run `cmsenv`.
+* ALTERNATIVE: Install `CMSSW10` and compile the generator filter and fragment files by running `setup.sh`.
 
 Each era has a set of files. Take 2016 as an example, let's look at them:
 * `2016DY.sh` : where the generation of new events only happens.
