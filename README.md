@@ -70,10 +70,13 @@ __Notice__:
 
 ## Match events - Generator filter (CRAB)
 Need to have a CentOs7 container that supports `CMSSW10` and all the CRAB jobs should be submitted in that environment.
-Some command like this:
+On lxplus, use a command like this ([reference](https://cms-sw.github.io/singularity.html)):
 ```
-singularity shell -B /afs -B /eos -B /cvmfs docker://cmssw/cc7:latest
+cmssw-el7
 ```
+
+This container has the access to the EOS, so you can install your CMSSW at your CERN box.
+
 Install `CMSSW10` and compile the generator filter and fragment files by running `setup.sh`.
 
 Each era has a set of files. Take 2016 as an example, let's look at them:
