@@ -75,7 +75,7 @@ On lxplus, use a command like this ([reference](https://cms-sw.github.io/singula
 cmssw-el7
 ```
 To set up the CMSSW:
-* **RECOMMENDED:** cd to `/eos/project-h/htozg-dy-privatemc/CMSSW_10_6_40/src` and run `cmsenv`.
+* **RECOMMENDED:** cd to `/eos/project-h/htozg-dy-privatemc/CMSSW_10_6_40/src` and run `cmsenv; scram b`.
 * ALTERNATIVE: Install `CMSSW10` and compile the generator filter and fragment files by running `setup.sh`.
 
 Each era has a set of files. Take 2016 as an example, let's look at them:
