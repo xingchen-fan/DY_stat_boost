@@ -113,3 +113,16 @@ According to my rough estimation, 50k events requested will give us one event af
 |2017|13045|65000|
 |2018|14056|70000|
 
+## CRAB Job Guide (No-brainer Version)
+
+Take a 2017 submission as an example:
+
+1. Login to LXPLUS
+2. Run `cmssw-el7`
+3. `cd` to the prepared CMSSW dir in our CERNBOX and run `cmsenv; scram b`
+4. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder.
+5. Back to your local repo dir, in `crabConfig2017.py`, change `config.General.requestName` to a unique name.
+6. In `2017.sh`, change the `xrdcp` line to something like `xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/YOURDIR/SOMESUBMISSION/.`
+7. Run `crab submit -c crabConfig2016.py`
+
+Now, you successfully submit 10k jobs in a submission and there will eventually be about 9500 output files (5% failure rate) in `/YOURDIR/SOMESUBMISSION` if evenrything goes as intended.
