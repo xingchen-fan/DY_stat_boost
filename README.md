@@ -130,6 +130,6 @@ Take a 2017 submission as an example:
    ```
    xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/YOURDIR/SOMESUBMISSION/.
    ```
-9. Run `crab submit -c crabConfig2016.py`
+9. Run `crab submit -c crabConfig2017.py`
 
 Now, you successfully submit 10k jobs in a submission and there will eventually be about 9500 output files (5% failure rate) in `/YOURDIR/SOMESUBMISSION` if evenrything goes as intended.
