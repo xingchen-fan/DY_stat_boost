@@ -119,10 +119,17 @@ Take a 2017 submission as an example:
 
 1. Login to LXPLUS
 2. Run `cmssw-el7`
-3. `cd` to the prepared CMSSW dir in our CERNBOX and run `cmsenv; scram b`
-4. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder.
-5. Back to your local repo dir, in `crabConfig2017.py`, change `config.General.requestName` to a unique name.
-6. In `2017.sh`, change the `xrdcp` line to something like `xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/YOURDIR/SOMESUBMISSION/.`
-7. Run `crab submit -c crabConfig2016.py`
+3. `cd` to the prepared CMSSW dir in our CERNBOX
+   ```
+   cd /eos/project/h/htozg-dy-privatemc/CMSSW_10_6_40/src/
+   ```
+   and run `cmsenv; scram b`
+5. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder.
+6. Back to your local repo dir, in `crabConfig2017.py`, change `config.General.requestName` to a unique name.
+7. In `2017.sh`, change the `xrdcp` line to something like
+   ```
+   xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/YOURDIR/SOMESUBMISSION/.
+   ```
+9. Run `crab submit -c crabConfig2016.py`
 
 Now, you successfully submit 10k jobs in a submission and there will eventually be about 9500 output files (5% failure rate) in `/YOURDIR/SOMESUBMISSION` if evenrything goes as intended.
