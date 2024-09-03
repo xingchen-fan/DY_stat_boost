@@ -17,7 +17,7 @@ config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 9000
 config.JobType.maxJobRuntimeMin = 1800
 
-config.Data.splitting = 'EventBased'
+config.Data.splitting = 'Automatic'
 config.Data.unitsPerJob = 1
 config.Data.totalUnits = 1400
 

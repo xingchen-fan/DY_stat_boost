@@ -51,7 +51,7 @@ cmsRun $TAG"__AOD__cfg_"$NJOB".py"
 echo ---------------------------MINIAOD-------------------------
 Input_filename=$TAG"_"$NJOB"__AOD.root"
 Output_filename=$TAG"_"$NJOB"__MINIAOD.root"
-cmsDriver.py  --python_filename $TAG"__MINIAOD__cfg_"$NJOB".py" --eventcontent MINIAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier MINIAODSIM --fileout file:$Output_filename --conditions 106X_mcRun2_asymptotic_preVFP_v11 --step PAT --geometry DB:Extended --filein file:$Input_filename --era Run2_2016_HIPM --runUnscheduled --no_exec --mc -n -1
+cmsDriver.py  --python_filename $TAG"__MINIAOD__cfg_"$NJOB".py" --eventcontent MINIAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier MINIAODSIM --fileout file:$Output_filename --conditions 106X_mcRun2_asymptotic_preVFP_v11 --step PAT --procModifiers run2_miniAOD_UL --geometry DB:Extended --filein file:$Input_filename --era Run2_2016_HIPM --runUnscheduled --no_exec --mc -n -1
 cmsRun $TAG"__MINIAOD__cfg_"$NJOB".py"
 
 echo ---------------------------NANOAOD-------------------------
