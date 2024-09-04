@@ -4,6 +4,7 @@ echo $(pwd)
 
 ARG=$2
 INDEX=$3
+DIR=$4
 NEVENTS=${ARG#*=}
 NJOB=$(($1+${INDEX#*=}))
 TAG="DY2018"
@@ -69,7 +70,6 @@ rm -f $TAG"_"$NJOB"__HLT.root"
 rm -f $TAG"_"$NJOB"__AOD.root"
 rm -f $TAG"_"$NJOB"__MINIAOD.root"
 
-xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/user/f/fanx/2018DY_crab_filterSample/.
+xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/user/f/fanx/$DIR/.
 rm -f $NANOAOD_NAME"__job-"$NJOB.root
 rm -rf CMSSW_10_6_40
-
