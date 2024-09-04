@@ -96,7 +96,7 @@ Inside the CRAB config file, there are some key lines and parameters that I will
 * ***`config.General.requestName`*** : Need to be a unique name for each submission.
 * `config.JobType.scriptExe` : Specify the shell script run in jobs.
 * `config.Data.totalUnits = 10000` : Number of jobs = 10000. Each job will have a job number `njob` from 1 to 10k. CRAB only allows up to 10k jobs per submission.
-* ***`config.JobType.scriptArgs = ['Nevents=10000', 'Index=0']`*** : `Nevents` should always be 10000 per job, but there is a text `njob + Index` at the end of the output NanoAOD file to distinguish different jobs. If the output files of all your submissions are transferred to the same directory, you need to change `Index` per submission so that the names of the files are different from each other.
+* ***`config.JobType.scriptArgs = ['Nevents=10000', 'Index=0', 'DIR=YOURDIR']`*** : `Nevents` should always be 10000 per job, but there is a text `njob + Index` at the end of the output NanoAOD file to distinguish different jobs. If the output files of all your submissions are transferred to the same directory, you need to change `Index` per submission so that the names of the files are different from each other, otherwise keep it 0. `DIR` is the directory that you want to transfer the outputs of this submission to.
 
 Finally, submit the jobs to the CRAB:
 
@@ -124,11 +124,11 @@ Take a 2017 submission as an example:
    cd /eos/project/h/htozg-dy-privatemc/CMSSW_10_6_40/src/
    ```
    and run `cmsenv; scram b`
-5. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder.
-6. Back to your local repo dir, in `crabConfig2017.py`, change `config.General.requestName` to a unique name.
+5. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder, i.e. `YOURDIR/SOMESUBMISSION/`.
+6. Back to your local repo dir. In `crabConfig2017.py`, change `config.General.requestName` to a unique name and change `DIR` value in `config.JobType.scriptArgs` to the directory in your folder, i.e. `SOMESUBMISSION`.
 7. In `2017.sh`, change the `xrdcp` line to something like
    ```
-   xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/YOURDIR/SOMESUBMISSION/.
+   xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/YOURDIR/$DIR/.
    ```
 9. Run `crab submit -c crabConfig2017.py`
 
