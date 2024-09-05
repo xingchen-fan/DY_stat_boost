@@ -14,7 +14,7 @@ config.JobType.scriptExe  = '2016APVDY.sh'
 config.JobType.scriptArgs = ['Nevents=10000', 'Index=0', 'DIR=YOURDIR']
 config.JobType.inputFiles = ['FrameworkJobReport.xml']
 config.JobType.numCores = 4
-config.JobType.maxMemoryMB = 9000
+config.JobType.maxMemoryMB = 6300
 config.JobType.maxJobRuntimeMin = 1400
 
 config.Data.splitting = 'EventBased'
