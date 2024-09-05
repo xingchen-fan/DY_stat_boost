@@ -84,12 +84,9 @@ Each era has a set of files. Take 2016 as an example, let's look at them:
 * `FrameworkJobReport.xml` : A minimal report file required by the CRAB config file and shared by all eras.
 * `crabConfig2016.py` : the CRAB config file that you need to modify.
 
-There is no need to modify the skeleton CMSSW config file, but the shell script and the CRAB config file.
+There is no need to modify the skeleton CMSSW config file or the shell script, but the CRAB config file.
 
-In our shared CERN box, please create a directory for yourself, in my case, `/fanx`. In the shell script, you need to specify where the output NanoAOD files transferred to at the end of the script, for example:
-```
-xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/fanx/.
-```
+In our shared CERN box, please create a directory for yourself, in my case, `/fanx`, and per year, create a dedicated folder such as `/2017`.
 
 Inside the CRAB config file, there are some key lines and parameters that I will explain in the following, and the lines need modifications are in ***italics***:
 * `config.General.workArea` : A directory will be create to hold the log files of your submissions.
