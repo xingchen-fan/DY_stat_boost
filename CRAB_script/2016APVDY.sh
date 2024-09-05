@@ -9,7 +9,7 @@ NEVENTS=${ARG#*=}
 DIR=${ARGDIR#*=}
 NJOB=$(($1+${INDEX#*=}))
 TAG="DY2016APV"
-NANOAOD_NAME="DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8__RunIISummer20UL16NanoAODAPVv2-106X_mcRun2_asymptotic_preVFP_v9-v1__privateProduction"
+NANOAOD_NAME="DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8__RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v9-v1__privateProduction"
 Fragment_filename=DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8__RunIISummer20UL16APV__fragment.py
 
 echo ---------------------------GEN-------------------------
