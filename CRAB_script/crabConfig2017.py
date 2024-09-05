@@ -11,7 +11,7 @@ config.General.transferOutputs = True
 config.JobType.pluginName = 'PrivateMC'
 config.JobType.psetName = 'ConfigDY.py'
 config.JobType.scriptExe  = '2017DY.sh'
-config.JobType.scriptArgs = ['Nevents=10000','Index=0', 'DIR=YOURDIR']
+config.JobType.scriptArgs = ['Nevents=10000', 'Tag=fanx1', 'DIR=YOURDIR/YEAR']
 config.JobType.inputFiles = ['FrameworkJobReport.xml']
 config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 6300

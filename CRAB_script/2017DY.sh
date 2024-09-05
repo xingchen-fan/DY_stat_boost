@@ -3,11 +3,12 @@ echo "this is not a test"
 echo $(pwd)
 
 ARG=$2
-INDEX=$3
+ARGTAG=$3
 ARGDIR=$4
 DIR=${ARGDIR#*=}
 NEVENTS=${ARG#*=}
-NJOB=$(($1+${INDEX#*=}))
+#NJOB=$(($1+${INDEX#*=}))
+OUTTAG=${ARGTAG#*=}
 TAG="DY2018"
 
 NANOAOD_NAME="DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8__RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v8-v1__privateProduction"
@@ -72,6 +73,6 @@ rm -f $TAG"_"$NJOB"__HLT.root"
 rm -f $TAG"_"$NJOB"__AOD.root"
 rm -f $TAG"_"$NJOB"__MINIAOD.root"
 
-xrdcp  $NANOAOD_NAME"__job-"$NJOB.root root://eosuser.cern.ch//eos/user/f/fanx/$DIR/.
-rm -f $NANOAOD_NAME"__job-"$NJOB.root
+xrdcp  $NANOAOD_NAME"__job-"$NJOB"_"$OUTTAG".root" root://eosuser.cern.ch//eos/project/h/htozg-dy-privatemc/$DIR/.
+rm -f $NANOAOD_NAME"__job-"$NJOB"_"$OUTTAG".root"
 rm -rf CMSSW_10_6_40
