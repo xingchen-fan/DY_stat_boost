@@ -122,7 +122,7 @@ Take a 2017 submission as an example:
    ```
    and run `cmsenv; scram b`
 5. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder, i.e. `YOURDIR/2017`.
-6. Back to your local repo dir. In `crabConfig2017.py`, change `config.General.requestName` to a unique name and change `DIR` value in `config.JobType.scriptArgs` to the directory in your folder.
+6. Back to your local repo dir. In `crabConfig2017.py`, change `config.General.requestName` to a unique name. In the line of `config.JobType.scriptArgs`, change the value of `Tag` to a unique one per submission and change `DIR` value to the directory in your folder.
 7. Run `crab submit -c crabConfig2017.py`
 
 Now, you successfully submit 10k jobs in a submission and there will eventually be about 9500 output files (5% failure rate) in `/YOURDIR/2017` if evenrything goes as intended.
