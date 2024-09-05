@@ -4,7 +4,8 @@ echo $(pwd)
 
 ARG=$2
 INDEX=$3
-DIR=$4
+ARGDIR=$4
+DIR=${ARGDIR#*=}
 NEVENTS=${ARG#*=}
 NJOB=$(($1+${INDEX#*=}))
 TAG="DY2018"
