@@ -115,8 +115,9 @@ According to my rough estimation, 50k events requested will give us one event af
 Take a 2017 submission as an example:
 
 1. Login to LXPLUS
-2. Run `cmssw-el7`
-3. `cd` to the prepared CMSSW dir in our CERNBOX
+2. git clone this repo.
+3. Run `cmssw-el7`
+4. `cd` to the prepared CMSSW dir in our CERNBOX
    ```
    cd /eos/project/h/htozg-dy-privatemc/CMSSW_10_6_40/src/
    ```
