@@ -123,7 +123,19 @@ Take a 2017 submission as an example:
    ```
    and run `cmsenv; scram b`
 5. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder, i.e. `YOURDIR/2017`.
-6. Back to your local repo dir. In `crabConfig2017.py`, change `config.General.requestName` to a unique name. In the line of `config.JobType.scriptArgs`, change the value of `Tag` to a unique one per submission and change `DIR` value to the directory in your folder.
-7. Run `crab submit -c crabConfig2017.py`
+6. Back to your local repo dir and run `submitter.sh`:
+   ```
+   .\submitter.sh crabConfig2017.py n DY2017 YOURDIR/2017 MYTAG
+   ```
+   where there are 5 arguments:
+   * The CRAB config file you want to use.
+   * The number of submissions you want to submit. `n` means **n*10k** jobs submitted here.
+   * The name of the submission for monitoring. In each submission, a number will be added at the end of it so that the names are different.
+   * The folder in our CERNBOX where you want to download the output files to.
+   * The tag at the end of the output root files. In each submission, a number will be added at the end of it so that the tags are different.
 
-Now, you successfully submit 10k jobs in a submission and there will eventually be about 9500 output files (5% failure rate) in `/YOURDIR/2017` if evenrything goes as intended.
+Now, you successfully submit **n** submissions of jobs and there will eventually be about **n***9500 output files (5% failure rate) in `/YOURDIR/2017` if evenrything goes as intended.
+
+As I list in the table previously, we need 7 submissions (10k jobs each) to have one fold of 2017 DY statistics. Likewise, 3 submissions for 2016, 4 submissions for 2016APV and 7 submssions for 2018. DO NOT submit all these jobs together and you will lose your priority! Finish one year at a time and move on to the next year. 
+
+If you finish all the years, congratulations! You help us increase the statistics by 1 fold! And you can create a sub-folder like `/1fold` in `/YOURDIR` and move all the root files to it, clearing up `/YOURDIR`. Then you can move on to the next fold. 
