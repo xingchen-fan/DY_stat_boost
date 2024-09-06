@@ -138,4 +138,4 @@ Now, you successfully submit **n** submissions of jobs and there will eventually
 
 As I list in the table previously, we need 7 submissions (10k jobs each) to have one fold of 2017 DY statistics. Likewise, 3 submissions for 2016, 4 submissions for 2016APV and 7 submssions for 2018. DO NOT submit all these jobs together and you will lose your priority! Finish one year at a time and move on to the next year. 
 
-If you finish all the years, congratulations! You help us increase the statistics by 1 fold! And you can create a sub-folder like `/1fold` in `/YOURDIR` and move all the root files to it, clearing up `/YOURDIR`. Then you can move on to the next fold. 
+If you finish all the years, congratulations! You help us increase the statistics by 1 fold! And you can create a sub-folder like `/1fold` in `/YOURDIR` and move all the root files to it, cleaning up `/YOURDIR`. Then you can move on to the next fold. 
