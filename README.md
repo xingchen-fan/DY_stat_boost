@@ -125,7 +125,7 @@ Take a 2017 submission as an example:
 5. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder, i.e. `YOURDIR/2017`.
 6. Back to your local repo dir and run `submitter.sh`:
    ```
-   .\submitter.sh crabConfig2017.py n DY2017 YOURDIR/2017 MYTAG
+   ./submitter.sh crabConfig2017.py n DY2017 YOURDIR/2017 MYTAG
    ```
    where there are 5 arguments:
    * The CRAB config file you want to use.
