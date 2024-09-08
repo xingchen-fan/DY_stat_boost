@@ -7,9 +7,9 @@ ARGTAG=$3
 ARGDIR=$4
 DIR=${ARGDIR#*=}
 NEVENTS=${ARG#*=}
-#NJOB=$(($1+${INDEX#*=}))
+NJOB=$1 #$(($1+${INDEX#*=}))
 OUTTAG=${ARGTAG#*=}
-TAG="DY2018"
+TAG="DY2017"
 
 NANOAOD_NAME="DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8__RunIISummer20UL17NanoAODv9-106X_mc2017_realistic_v8-v1__privateProduction"
 Fragment_filename=DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8__RunIISummer20UL17__fragment.py
