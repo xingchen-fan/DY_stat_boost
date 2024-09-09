@@ -60,7 +60,7 @@ cmsRun $TAG"__MINIAOD__cfg_"$NJOB".py"
 
 echo ---------------------------NANOAOD-------------------------
 Input_filename=$TAG"_"$NJOB"__MINIAOD.root"
-Output_filename=$NANOAOD_NAME"__job-"$NJOB.root
+Output_filename=$NANOAOD_NAME"__job-"$NJOB"_"$OUTTAG".root"
 cmsDriver.py --python_filename $TAG"__NANOAOD__cfg_"$NJOB".py" --eventcontent NANOAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAODSIM --fileout file:$Output_filename --conditions 106X_mcRun2_asymptotic_v17 --step NANO --filein file:$Input_filename --era Run2_2016,run2_nanoAOD_106Xv2 --no_exec --mc -n -1
 cmsRun $TAG"__NANOAOD__cfg_"$NJOB".py"
 
