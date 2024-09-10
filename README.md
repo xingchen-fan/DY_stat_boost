@@ -133,7 +133,7 @@ Take a 2017 submission as an example:
    * The name of the submission for monitoring. In each submission, a number will be added at the end of it so that the names are different.
    * The subdirectory in our CERNBOX where you want to download the output files to.
    * The tag at the end of the output root files. In each submission, a number will be added at the end of it so that the tags are different.
-
+**IMPORTATNT:** You need to have your grid certificate installed, please go to this [page](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookStartingGrid) and follow the steps. 
 Now, you successfully submit **n** submissions of jobs and there will eventually be about **n***9500 output files (5% failure rate) in `/YOURDIR/2017` if evenrything goes as intended.
 
 Two usefull CRAB commands are
