@@ -123,7 +123,7 @@ Take a 2017 submission as an example:
    ```
    and run `cmsenv; scram b`
 5. Craete your own folder in our CERNBOX. Then create one folder per submission in your folder, i.e. `YOURDIR/2017`.
-6. Back to your local repo dir and run `submitter.sh`:
+6. Back to the `CRAB_script/` of your local repo dir and run `submitter.sh`:
    ```
    ./submitter.sh crabConfig2017.py n DY2017 YOURDIR/2017 MYTAG
    ```
@@ -131,7 +131,7 @@ Take a 2017 submission as an example:
    * The CRAB config file you want to use.
    * The number of submissions you want to submit. `n` means **n*10k** jobs submitted here.
    * The name of the submission for monitoring. In each submission, a number will be added at the end of it so that the names are different.
-   * The folder in our CERNBOX where you want to download the output files to.
+   * The subdirectory in our CERNBOX where you want to download the output files to.
    * The tag at the end of the output root files. In each submission, a number will be added at the end of it so that the tags are different.
 
 Now, you successfully submit **n** submissions of jobs and there will eventually be about **n***9500 output files (5% failure rate) in `/YOURDIR/2017` if evenrything goes as intended.
