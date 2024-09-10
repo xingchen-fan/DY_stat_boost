@@ -143,7 +143,7 @@ Two usefull CRAB commands are
 ```
 crab status -d crab_projects/crab_DY2017_1
 ```
-which is to monitor the jobs,
+which is to monitor the jobs. This command will provide some URL that you can open in your broswer such that you can monitor the jobs in a more intuitive way. If you keep that URL open, you don't need to log in to LXPLUS to monitor the jobs.
 ```
 crab kill -d crab_projects/crab_DY2017_1
 ```
