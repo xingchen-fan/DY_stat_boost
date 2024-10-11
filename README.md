@@ -107,8 +107,8 @@ According to my rough estimation, 50k events requested will give us one event af
 |-|-|-|
 |2016|5128|26000|
 |2016APV|6439|33000|
-|2017|13045|65000|
-|2018|14056|70000|
+|2017|13045|70000|
+|2018|14056|80000|
 
 ## CRAB Job Guide (No-brainer Version)
 
