@@ -3,7 +3,7 @@ from CRABClient.UserUtilities import config
 
 config = config()
 
-config.General.requestName = '2018DY'
+config.General.requestName = 'DY2018_8'
 config.General.workArea = 'crab_projects'
 config.General.transferOutputs = True
 
@@ -11,15 +11,15 @@ config.General.transferOutputs = True
 config.JobType.pluginName = 'PrivateMC'
 config.JobType.psetName = 'ConfigDY.py'
 config.JobType.scriptExe  = '2018DY.sh'
-config.JobType.scriptArgs = ['Nevents=10000', 'Tag=fanx1', 'DIR=YOURDIR/YEAR']
+config.JobType.scriptArgs = ['Nevents=10000', 'Tag=fanx_8', 'DIR=YOURDIR/YEAR']
 config.JobType.inputFiles = ['FrameworkJobReport.xml']
 config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 6300
-config.JobType.maxJobRuntimeMin = 1800
+config.JobType.maxJobRuntimeMin = 1400
 
 config.Data.splitting = 'EventBased'
 config.Data.unitsPerJob = 1
-config.Data.totalUnits = 1400
+config.Data.totalUnits = 10000
 
 config.Data.outputPrimaryDataset = 'ShellTest'
 config.Data.publication = True
