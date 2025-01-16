@@ -41,8 +41,9 @@ fi
 echo ---------------------------DIGIPREMIX-------------------------
 Input_filename=$TAG"_"$NJOB"__SIM.root"
 Output_filename=$TAG"_"$NJOB"__DIGIPREMIX.root"
-cmsDriver.py --python_filename $TAG"__DIGIPREMIX__cfg_"$NJOB".py" --eventcontent PREMIXRAW --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM-DIGI --fileout file:$Output_filename --pileup_input "dbs:/Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX" --conditions 106X_upgrade2018_realistic_v11_L1v1 --step DIGI,DATAMIX,L1,DIGI2RAW --procModifiers premix_stage2 --geometry DB:Extended --filein file:$Input_filename --datamix PreMix --era Run2_2018 --runUnscheduled --no_exec --mc -n -1
+cmsDriver.py --python_filename $TAG"__DIGIPREMIX__cfg_"$NJOB".py" --eventcontent PREMIXRAW --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM-DIGI --fileout file:$Output_filename --pileup_input "filelist:2018_degipremix_files_disk.txt" --conditions 106X_upgrade2018_realistic_v11_L1v1 --step DIGI,DATAMIX,L1,DIGI2RAW --procModifiers premix_stage2 --geometry DB:Extended --filein file:$Input_filename --datamix PreMix --era Run2_2018 --runUnscheduled --no_exec --mc -n -1
 cmsRun $TAG"__DIGIPREMIX__cfg_"$NJOB".py"
+#dbs:/Neutrino_E-10_gun/RunIISummer20ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX
 
 if [ -e $Output_filename ]
 then
