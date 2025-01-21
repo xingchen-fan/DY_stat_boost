@@ -12,7 +12,7 @@ config.JobType.pluginName = 'PrivateMC'
 config.JobType.psetName = 'ConfigDY.py'
 config.JobType.scriptExe  = '2016DY.sh'
 config.JobType.scriptArgs = ['Nevents=10000', 'Tag=fanx_3', 'DIR=fanx3/2016']
-#config.JobType.inputFiles = ['FrameworkJobReport.xml']
+config.JobType.inputFiles = ['FrameworkJobReport.xml']
 config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 6300
 config.JobType.maxJobRuntimeMin = 1400
