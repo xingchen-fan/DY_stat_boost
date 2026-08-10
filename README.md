@@ -110,6 +110,14 @@ According to my rough estimation, 50k events requested will give us one event af
 |2017|13045|70000|
 |2018|14056|80000|
 
+For Run3, assuming jet photon events makes up 55% of total DY after baseline
+|Era|Existing events after baseline|Number of jobs (10k events/job)|
+|-|-|-|
+|2022|13500|68000|
+|2022EE|43700|219000|
+|2023|15000|75000|
+|2023BPix|10000|50000|
+|2024|141000|707000|
 ## CRAB Job Guide (No-brainer Version)
 
 **IMPORTANT:** You need to have your grid certificate installed, please go to this [page](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookStartingGrid) and follow the steps. 
