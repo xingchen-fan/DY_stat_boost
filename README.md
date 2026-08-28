@@ -110,9 +110,19 @@ According to my rough estimation, 50k events requested will give us one event af
 |2017|13045|70000|
 |2018|14056|80000|
 
+For Run3, assuming jet photon events makes up 55% of total DY after baseline
+|Era|Existing events after baseline|Number of jobs (10k events/job)|
+|-|-|-|
+|2022|13500|68000|
+|2022EE|43700|219000|
+|2023|15000|75000|
+|2023BPix|10000|50000|
+|2024|141000|707000|
 ## CRAB Job Guide (No-brainer Version)
 
 **IMPORTANT:** You need to have your grid certificate installed, please go to this [page](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookStartingGrid) and follow the steps. 
+
+**NOTICE:** Another [repo](https://github.com/xingchen-fan/DY_filter_MC_submission/tree/main) is created just for Run3 MC job submission. Please go there!
 
 Take a 2017 submission as an example:
 
@@ -137,9 +147,9 @@ Take a 2017 submission as an example:
    * The tag at the end of the output root files. In each submission, a number will be added at the end of it so that the tags are different.
    
 
-Now, you successfully submit **n** submissions of jobs and there will eventually be about **n***9500 output files (5% failure rate) in `/YOURDIR/2017` if evenrything goes as intended.
+Now, you successfully submit **n** submissions of jobs and there will eventually be about **n***9500 output files (5% failure rate) in `/YOURDIR/2017` if everything goes as intended.
 
-Two usefull CRAB commands are
+Three useful CRAB commands are
 ```
 crab status -d crab_projects/crab_DY2017_1
 ```
@@ -148,6 +158,12 @@ which is to monitor the jobs. This command will provide some URL that you can op
 crab kill -d crab_projects/crab_DY2017_1
 ```
 which is to kill a submission.
+
+```
+crab resubmit -d crab_projects/crab_DY2017_1
+```
+which is to resubmit failed jobs in a submission.
+
 
 As I list in the table previously, we need 7 submissions (10k jobs each) to have one fold of 2017 DY statistics. Likewise, 3 submissions for 2016, 4 submissions for 2016APV and 7 submssions for 2018. DO NOT submit all these jobs together and you will lose your priority! Finish one year at a time and move on to the next year. 
 
