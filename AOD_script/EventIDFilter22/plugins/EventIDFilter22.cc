@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    AODmacthing/EventIDFilter
-// Class:      EventIDFilter
+// Package:    MyFilters/EventIDFilter22
+// Class:      EventIDFilter22
 //
-/**\class EventIDFilter EventIDFilter.cc AODmacthing/EventIDFilter/plugins/EventIDFilterDY2018photon.cc
+/**\class EventIDFilter22 EventIDFilter22.cc MyFilters/EventIDFilter22/plugins/EventIDFilter22.cc
 
  Description: [one line class summary]
 
@@ -12,13 +12,14 @@
 */
 //
 // Original Author:  Xingchen Fan
-//         Created:  Thu, 07 Mar 2024 16:10:43 GMT
+//         Created:  Sun, 09 Aug 2026 22:10:47 GMT
 //
 //
 
 // system include files
 #include <memory>
 #include <iostream>
+
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/stream/EDFilter.h"
@@ -33,27 +34,29 @@
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "TFile.h"
 #include "TTree.h"
-
+using namespace std;
 //
 // class declaration
 //
 
-class EventIDFilterDY2018photon : public edm::stream::EDFilter<> {
+class EventIDFilter22 : public edm::stream::EDFilter<> {
 public:
-  explicit EventIDFilterDY2018photon(const edm::ParameterSet&);
-  ~EventIDFilterDY2018photon();
+  explicit EventIDFilter22(const edm::ParameterSet&);
+  ~EventIDFilter22() override;
 
   static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
 private:
-  virtual void beginStream(edm::StreamID) override;
-  virtual bool filter(edm::Event&, const edm::EventSetup&) override;
-  virtual void endStream() override;
-  std::vector<Long64_t> id_list;
-  //virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;
-  //virtual void endRun(edm::Run const&, edm::EventSetup const&) override;
-  //virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
-  //virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
+  void beginStream(edm::StreamID) override;
+  bool filter(edm::Event&, const edm::EventSetup&) override;
+  void endStream() override;
+  vector<Long64_t> id_list;
+  vector<int> lumi_list;
+  vector<int> run_list;
+  //void beginRun(edm::Run const&, edm::EventSetup const&) override;
+  //void endRun(edm::Run const&, edm::EventSetup const&) override;
+  //void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
+  //void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
 
   // ----------member data ---------------------------
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
@@ -75,7 +78,7 @@ private:
 //
 // constructors and destructor
 //
-EventIDFilterDY2018photon::EventIDFilterDY2018photon(const edm::ParameterSet& iConfig) {
+EventIDFilter22::EventIDFilter22(const edm::ParameterSet& iConfig) {
   //now do what ever initialization is needed
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
   exampleToken_ = consumes<ExampleData>(iConfig.getParameter<edm::InputTag>("examples"));
@@ -85,7 +88,7 @@ EventIDFilterDY2018photon::EventIDFilterDY2018photon(const edm::ParameterSet& iC
 #endif
 }
 
-EventIDFilterDY2018photon::~EventIDFilterDY2018photon() {
+EventIDFilter22::~EventIDFilter22() {
   // do anything here that needs to be done at destruction time
   // (e.g. close files, deallocate resources etc.)
   //
@@ -97,12 +100,14 @@ EventIDFilterDY2018photon::~EventIDFilterDY2018photon() {
 //
 
 // ------------ method called on each new Event  ------------
-bool EventIDFilterDY2018photon::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) {
+bool EventIDFilter22::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) {
   using namespace edm;
   Long64_t event_aod = iEvent.id().event();
+  int lumi_aod = iEvent.id().luminosityBlock();
+  int run_aod = iEvent.id().run();
   bool match = false;
-  for (unsigned int i(0); i < id_list.size(); i++){
-    if (event_aod == id_list[i]) {
+  for (long unsigned int i(0); i < id_list.size(); i++){
+    if (event_aod == id_list[i] && lumi_aod == lumi_list[i] && run_aod == run_list[i]) {
       match = true;
       break;
     }
@@ -111,44 +116,53 @@ bool EventIDFilterDY2018photon::filter(edm::Event& iEvent, const edm::EventSetup
 }
 
 // ------------ method called once each stream before processing any runs, lumis or events  ------------
-void EventIDFilterDY2018photon::beginStream(edm::StreamID) {
-  auto picofile = TFile::Open("root://eosuser.cern.ch//eos/user/f/fanx/event_mixing/sample/DY_photon_output_kingscanyon_v1_2018.root", "READ");
+void EventIDFilter22::beginStream(edm::StreamID) {
+  // please remove this method if not needed
+  auto picofile = TFile::Open("root://eosuser.cern.ch//eos/user/f/fanx/DY_output_redwood_v1_2022.root", "READ");
   Long64_t event_pico = 0;
+  int lumi_pico = 0;
+  int run_pico = 0;
   auto tree = (TTree*)picofile->Get("tree");
   tree->SetBranchAddress("event", &event_pico);
+  tree->SetBranchAddress("lumiblock", &lumi_pico);
+  tree->SetBranchAddress("run", &run_pico);
   for (auto i(0); i < tree->GetEntries(); i++){
     tree->GetEntry(i);
     id_list.push_back(event_pico);
+    lumi_list.push_back(lumi_pico);
+    run_list.push_back(run_pico);
   }
   picofile->Close();
 }
 
 // ------------ method called once each stream after processing all runs, lumis and events  ------------
-void EventIDFilterDY2018photon::endStream() {
+void EventIDFilter22::endStream() {
+  // please remove this method if not needed
   id_list.clear();
+  lumi_list.clear();
+  run_list.clear();
 }
 
 // ------------ method called when starting to processes a run  ------------
 /*
 void
-EventIDFilterDY2018photon::beginRun(edm::Run const&, edm::EventSetup const&)
-{
+EventIDFilter22::beginRun(edm::Run const&, edm::EventSetup const&)
+{ 
 }
 */
 
 // ------------ method called when ending the processing of a run  ------------
 /*
 void
-EventIDFilterDY2018photon::endRun(edm::Run const&, edm::EventSetup const&)
+EventIDFilter22::endRun(edm::Run const&, edm::EventSetup const&)
 {
-  
 }
 */
 
 // ------------ method called when starting to processes a luminosity block  ------------
 /*
 void
-EventIDFilter::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+EventIDFilter22::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 */
@@ -156,13 +170,13 @@ EventIDFilter::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup
 // ------------ method called when ending the processing of a luminosity block  ------------
 /*
 void
-EventIDFilter::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+EventIDFilter22::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 */
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
-void EventIDFilterDY2018photon::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+void EventIDFilter22::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
   //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
@@ -170,4 +184,4 @@ void EventIDFilterDY2018photon::fillDescriptions(edm::ConfigurationDescriptions&
   descriptions.addDefault(desc);
 }
 //define this as a plug-in
-DEFINE_FWK_MODULE(EventIDFilterDY2018photon);
+DEFINE_FWK_MODULE(EventIDFilter22);
