@@ -3,15 +3,15 @@ End-to-end scripts to generate more events for DY+fake events
 ## Pico script
 Scripts use UCSB pico data format files to select certain events from 2016-2018 UL samples. Three event producers are:
 
-* `producer.c`: Select DY+fake baseline events. BDT evaluation requires a weight xml file.
+* `producer_bitmap.c`: Select DY+fake baseline events, using a bit map branch. BDT evaluation requires a weight xml file, if BDT calculation is needed.
   * Output _baseline_pico.root_ file.
 * `DY_photon_producer.c`: Select events only using photon object selection.
   * Output _photon_pico.root_ file.
-* `DY_Z_producer.c`: Select events only using Z related selection.
+* `DY_Z_producer_V2.c`: Select events only using Z related selection.
   * Output _Z_pico.root_ file.
 
 ## AOD script
-To do truth matching of the recon photons, we need to pin down the events we want using event ID, run number and lumiblock matching between pico and AOD (or miniAOD). DY events that passing the baseline are selected using a bit map branch in pico samples (`AOD_script/producer_bitmap`).
+To do truth matching of the recon photons, we need to pin down the events we want using event ID, run number and lumiblock matching between pico and AOD (or miniAOD).
 ### EDFilter setup
 AOD (or miniAOD) has a format of Event Data Model (EDM) which requires us to use CMSSW to access and manipulate. To obtain the event ID of each AOD event, an EDFilter is needed. Please refer to this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideSkeletonCodeGenerator) on how to set up a filter.
 
@@ -57,15 +57,15 @@ Several truth matching processes are:
   * The output events contain the photons that will be used in event mixing.
 
 ## Pile-up events - Event mixing
-To generate more no match events, we mix the Z candidates from the events passing the lepton-related-only selection with pile-up photons from `truth_matching_study_mixing.py` process. 
+To generate more no match events, we mix the Z candidates from the events passing the lepton-related-only selection with pile-up photons from `truth_matching_study_mixing.py` process whose output is like _PU_photon_pico.root_. 
 
-Event mixing process is implemented by `event_mixing/Zg_mixing_V2_vector.c`, which takes Z candidates and photons as inputs. 
+Event mixing process is implemented by `event_mixing/Zg_mixing_V2_vector.c`, which takes Z candidates and photons as inputs.
+```
+root 'Zg_mixing_V2_vector.c("PU_photon_pico.root", "Z_pico.root", "mixing_2017.root", "ggf")'
+```
 Variables of the new event are taken either from the Z event or photon event that are being mixed.   
 
 The mixed events' error bars need extra cares and please use `plot_mixing_corrErrBar.c` to plot the corrected error bar.
-
-Two scripts in `event_mixing/Z_photon_producer/` are to select photons and Z candidates with object only selections.
-Output photons further go through the truth matching to get picked as pile-up photons for event mixing.
 
 ## Jet photon events - Generator filter (CERN Condor)
 Codes are originally from Jae-Bak's [repository](https://github.com/jaebak/produceMC/tree/UL). Refer to it for environment setup. I modified scripts to suit my need of mass generation.
