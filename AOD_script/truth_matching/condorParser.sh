@@ -10,5 +10,5 @@ cmsenv
 cd ~/condorStuff/
 
 # Change to other truth matching study if needed
-./truth_matching_study_DY.py $1
+./truth_matching_study_DY_truth_info_miniAOD.py  -n $1 -y $2
 

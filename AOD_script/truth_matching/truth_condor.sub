@@ -1,20 +1,48 @@
 universe = vanilla
 executable = condorParser.sh
-arguments = $$([$(Process) + 1])
+arguments = $$([$(Process) + 1]) 2024El
 
-error   = ../out_err/err.$$([$(Process)+1])
-output  = ../out_err/out.$$([$(Process)+1])
-log = truth.log
+error   = ../out_err/match.err.el.$$([$(Process)+1])
+output  = ../out_err/match.out.el.$$([$(Process)+1])
+log = truthothermatch.log
 MY.WantOS = "el9"
++JobFlavour = "longlunch"
 
-#2017 DY AOD file number
+#2017 DY
 #queue 537
 
-#2018 DY AOD file number
-queue 562
+#2018 DY
+#queue 562
 
-#2016 DY AOD file number
+#2016 DY
 #queue 324
 
-#2016APV DY AOD file number
+#2016APV DY
 #queue 379
+
+#2022 DY mini
+#queue 63
+
+#2022 DY ext mini
+#queue 95
+
+#2018 DY mini
+#queue 125
+
+#2022EE DY mini
+#queue 179
+
+#2022EE DY ext mini
+#queue 295
+
+#2023 DY mini
+#queue 146
+
+#2023BPix DY mini
+#queue 84
+
+#2023El DY mini
+queue 664
+
+#2023Mu DY mini
+#queue 675
