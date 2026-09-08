@@ -11,9 +11,9 @@ Scripts use UCSB pico data format files to select certain events from 2016-2018 
   * Output _Z_pico.root_ file.
 
 ## AOD script
-To do truth matching of the recon photons, we need to pin down the events we want using event ID matching between pico and AOD.
+To do truth matching of the recon photons, we need to pin down the events we want using event ID, run number and lumiblock matching between pico and AOD (or miniAOD).
 ### EDFilter setup
-AOD has a format of Event Data Model (EDM) which requires us to use CMSSW to access and manipulate. To obtain the event ID of each AOD event, an EDFilter is needed. Please refer to this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideSkeletonCodeGenerator) on how to set up a filter.
+AOD (or miniAOD) has a format of Event Data Model (EDM) which requires us to use CMSSW to access and manipulate. To obtain the event ID of each AOD event, an EDFilter is needed. Please refer to this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideSkeletonCodeGenerator) on how to set up a filter.
 
 In short, the setup code is as such
 ```
@@ -23,12 +23,24 @@ mkdir AODmacthing
 mkedfltr EventIDFilter
 ```
 
-In the filter, the event ID of each AOD event is compared with that of all the slected pico events. If the ID matched, the AOD event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset in `AODmacthing/EventIDFilter/python`. Two configuration files are needed, one for CMSSW to run and the other for CRAB job submission. Output files will be saved in the CERN box as specified in the CRAB config file.
+In the filter, the event ID, run number, lumiblock of each AOD (or miiniAOD) event is compared with those of all the slected pico events. If the values matched, the AOD (or miniAOD) event will be saved in an output EDM file. Submit CRAB jobs to run the filter over a full set of dataset in `AODmacthing/EventIDFilter/python`. Two configuration files are needed, one for CMSSW to run and the other for CRAB job submission. Output files will be saved in the CERN box as specified in the CRAB config file.
 
 Equivalent EDM files to the pico will be output 
   * ie. _baseline_AOD.root_ and _photon_AOD.root_.
 
-### Match and no match event slection
+One example of such event matching filter is at AOD_script/EventIDFilter22` where we find the corresponding miniAOD events to the selected pico events for 2022 DY events passing the baseline selection.
+
+For reference, the dataset versions of Run3 eras are the following:
+
+|Era|Datasets|
+|-|-|
+|2022| `/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22MiniAODv4-130X_mcRun3_2022_realistic_v5-v2/MINIAODSIM`, `/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22MiniAODv4-130X_mcRun3_2022_realistic_v5_ext1-v1/MINIAODSIM`|
+|2022EE|`/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EEMiniAODv4-130X_mcRun3_2022_realistic_postEE_v6-v2/MINIAODSIM`, `/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer22EEMiniAODv4-130X_mcRun3_2022_realistic_postEE_v6_ext1-v1/MINIAODSIM`|
+|2023|`/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23MiniAODv4-130X_mcRun3_2023_realistic_v14-v1/MINIAODSIM`|
+|2023BPix|`/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23MiniAODv4-130X_mcRun3_2023_realistic_v14-v1/MINIAODSIM`|
+|2024|`/DYto2E-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v4/MINIAODSIM`, `/DYto2Mu-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24MiniAODv6-150X_mcRun3_2024_realistic_v2-v6/MINIAODSIM`|
+
+### DY event classification 
 The truth matching of the pico recon photon with the AOD truth particles happens here. Due to the large number of events we need to go through, we use CERN batch system, HTCondor, for the process.
 
 Several truth matching processes are:
@@ -40,12 +52,12 @@ Several truth matching processes are:
 * `truth_matching_study_photon_only.py`: Truth matching events only using photon object selection and output no match events.
   * Output _nomatch_photon_pico.root_ file.
 
-## No match events - Event mixing
+## Pile-up events - Event mixing
 To generate more no match events, we mix the Z candicates from _Z_pico.root_ events with no match photons from _nomatch_photon_pico.root_ events. To separate GGF and Dijet events, use `print_event_id.py` to print out the event IDs of the corresponding events, and plot them separately by event ID matching.
 
 The mixed events' error bars need extra cares and please use `plot_mixing_corrErrBar.c` to plot the corrected error bar.
 
-## Match events - Generator filter (CERN Condor)
+## Jet photon events - Generator filter (CERN Condor)
 Codes are originally from Jae-Bak's [repository](https://github.com/jaebak/produceMC/tree/UL). Refer to it for environment setup. I modified scripts to suit my need of mass generation.
 
 Initialize your VOMS with
