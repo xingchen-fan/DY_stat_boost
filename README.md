@@ -11,7 +11,7 @@ Scripts use UCSB pico data format files to select certain events from 2016-2018 
   * Output _Z_pico.root_ file.
 
 ## AOD script
-To do truth matching of the recon photons, we need to pin down the events we want using event ID, run number and lumiblock matching between pico and AOD (or miniAOD).
+To do truth matching of the recon photons, we need to pin down the events we want using event ID, run number and lumiblock matching between pico and AOD (or miniAOD). DY events that passing the baseline are selected using a bit map branch in pico samples (`AOD_script/producer_bitmap`).
 ### EDFilter setup
 AOD (or miniAOD) has a format of Event Data Model (EDM) which requires us to use CMSSW to access and manipulate. To obtain the event ID of each AOD event, an EDFilter is needed. Please refer to this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideSkeletonCodeGenerator) on how to set up a filter.
 
@@ -28,7 +28,7 @@ In the filter, the event ID, run number, lumiblock of each AOD (or miiniAOD) eve
 Equivalent EDM files to the pico will be output 
   * ie. _baseline_AOD.root_ and _photon_AOD.root_.
 
-One example of such event matching filter is at AOD_script/EventIDFilter22` where we find the corresponding miniAOD events to the selected pico events for 2022 DY events passing the baseline selection.
+One example of such event matching filter is at `AOD_script/EventIDFilter22` where we find the corresponding miniAOD events to the selected pico events for 2022 DY events passing the baseline selection.
 
 For reference, the dataset versions of Run3 eras are the following:
 
@@ -45,17 +45,27 @@ The truth matching of the pico recon photon with the AOD truth particles happens
 
 Several truth matching processes are:
 
-* `truth_matching_study_DY.py`: Truth matching DY+fake baseline events and output no match events.
-  * Output _baseline_nomatch_pico.root_ file.
-* `truth_matching_study_DY_match_ph.py`: Truth matching DY+fake baseline events and output match truth photon (pion mother) events.
-  * Output _baseline_match_photon__(_mom_pion_)__pico.root_ file.
-* `truth_matching_study_photon_only.py`: Truth matching events only using photon object selection and output no match events.
-  * Output _nomatch_photon_pico.root_ file.
+* `truth_matching_study_DY_truth_info.py`: Truth matching DY+fake baseline events using corresponding AOD events.
+  * Branch `DY_class` specifies the event type:
+    * 1: Pile-up event
+    * 2: Jet photon event
+    * 3: Other event
+  * Branch `DY_class_jet` uses AK4 jets instead of gen photon to define types, same rules as `DY_class`.
+* `truth_matching_study_DY_truth_info_miniAOD.py`: Truth matching DY+fake baseline events using corresponding miniAOD events.
+  * Branch `DY_class` specifies the event type.
+* `truth_matching_study_mixing.py`: Truth matching events only using photon object selection and output events containing pile-up photons.
+  * The output events contain the photons that will be used in event mixing.
 
 ## Pile-up events - Event mixing
-To generate more no match events, we mix the Z candicates from _Z_pico.root_ events with no match photons from _nomatch_photon_pico.root_ events. To separate GGF and Dijet events, use `print_event_id.py` to print out the event IDs of the corresponding events, and plot them separately by event ID matching.
+To generate more no match events, we mix the Z candidates from the events passing the lepton-related-only selection with pile-up photons from `truth_matching_study_mixing.py` process. 
+
+Event mixing process is implemented by `event_mixing/Zg_mixing_V2_vector.c`, which takes Z candidates and photons as inputs. 
+Variables of the new event are taken either from the Z event or photon event that are being mixed.   
 
 The mixed events' error bars need extra cares and please use `plot_mixing_corrErrBar.c` to plot the corrected error bar.
+
+Two scripts in `event_mixing/Z_photon_producer/` are to select photons and Z candidates with object only selections.
+Output photons further go through the truth matching to get picked as pile-up photons for event mixing.
 
 ## Jet photon events - Generator filter (CERN Condor)
 Codes are originally from Jae-Bak's [repository](https://github.com/jaebak/produceMC/tree/UL). Refer to it for environment setup. I modified scripts to suit my need of mass generation.
